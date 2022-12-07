@@ -6,7 +6,7 @@
     <data>
         <variable
             name="film"
-            type="ru.zfix27r.movies.data.FilmTopResponse.Film" />
+            type="ru.zfix27r.movies.data.film.FilmTopFilm" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

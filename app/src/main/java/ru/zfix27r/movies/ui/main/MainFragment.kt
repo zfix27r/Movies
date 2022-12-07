@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ru.zfix27r.movies.R
-import ru.zfix27r.movies.data.FilmTopResponse
+import ru.zfix27r.movies.data.film.FilmTopFilm
 import ru.zfix27r.movies.databinding.FragmentMainBinding
 
 @AndroidEntryPoint
@@ -32,7 +32,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun onListenAction(): MovieActionListener {
         return object : MovieActionListener {
-            override fun onViewDetail(film: FilmTopResponse.Film) {
+            override fun onViewDetail(film: FilmTopFilm) {
 
             }
         }

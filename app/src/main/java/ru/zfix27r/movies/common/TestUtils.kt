@@ -56,9 +56,9 @@ class TestUtils {
             }
         }
 
-        if (jsonReader.peek() == JsonToken.END_OBJECT) println("sdfsdfsdfsdfsdfsdfs")
-        if (jsonReader.peek() == JsonToken.END_ARRAY) println("sdfsdfsdfsdfs97897070dfsdfs")
-        if (jsonReader.peek() == JsonToken.END_DOCUMENT) println("sdfsdfsdfsdfsdfsdf34234sdfs")
+        if (jsonReader.peek() == JsonToken.END_OBJECT) println("END_OBJECT")
+        if (jsonReader.peek() == JsonToken.END_ARRAY) println("END_ARRAY")
+        if (jsonReader.peek() == JsonToken.END_DOCUMENT) println("END_DOCUMENT")
 
         jsonReader.close()
     }

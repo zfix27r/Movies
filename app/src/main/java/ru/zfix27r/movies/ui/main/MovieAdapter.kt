@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.zfix27r.movies.R
-import ru.zfix27r.movies.data.FilmTopResponse
+import ru.zfix27r.movies.data.film.FilmTopFilm
 import ru.zfix27r.movies.databinding.FragmentMainItemBinding
-
 
 class MovieAdapter(
     private val actionListener: MovieActionListener
 ) :
-    ListAdapter<FilmTopResponse.Film, MovieAdapter.MovieViewHolder>(DiffCallback()),
+    ListAdapter<FilmTopFilm, MovieAdapter.MovieViewHolder>(DiffCallback()),
     View.OnClickListener {
 
     override fun getItemCount() = currentList.size
@@ -42,13 +41,13 @@ class MovieAdapter(
 
     class MovieViewHolder(val binding: FragmentMainItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    class DiffCallback : DiffUtil.ItemCallback<FilmTopResponse.Film>() {
-        override fun areItemsTheSame(old: FilmTopResponse.Film, new: FilmTopResponse.Film): Boolean = old.id == new.id
-        override fun areContentsTheSame(old: FilmTopResponse.Film, new: FilmTopResponse.Film): Boolean = old == new
+    class DiffCallback : DiffUtil.ItemCallback<FilmTopFilm>() {
+        override fun areItemsTheSame(old: FilmTopFilm, new: FilmTopFilm): Boolean = old.id == new.id
+        override fun areContentsTheSame(old: FilmTopFilm, new: FilmTopFilm): Boolean = old == new
     }
 
     override fun onClick(v: View) {
-        val item = v.tag as FilmTopResponse.Film
+        val item = v.tag as FilmTopFilm
         when (v.id) {
             R.id.titleRu -> actionListener.onViewDetail(item)
         }
