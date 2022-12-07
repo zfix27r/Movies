@@ -1,42 +1,40 @@
 package ru.zfix27r.movies.ui.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import ru.zfix27r.movies.R
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
+import ru.zfix27r.movies.data.FilmTopResponse
+import ru.zfix27r.movies.databinding.FragmentMainBinding
 
-class MainFragment : Fragment() {
+@AndroidEntryPoint
+class MainFragment : Fragment(R.layout.fragment_main) {
+    private val binding by viewBinding(FragmentMainBinding::bind)
+    private val viewModel by viewModels<MainViewModel>()
+    private val adapter = MovieAdapter(onListenAction())
 
-    companion object {
-        fun newInstance() = MainFragment()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.recycler.adapter = adapter
+
+        observeNotes()
     }
 
-    private lateinit var viewModel: MainViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun observeNotes() {
+        viewModel.movies.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+            println(it)
+        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    private fun onListenAction(): MovieActionListener {
+        return object : MovieActionListener {
+            override fun onViewDetail(film: FilmTopResponse.Film) {
 
-        val githubEndpoint = URL("https://api.github.com/")
-        val myConnection: HttpsURLConnection = githubEndpoint.openConnection() as HttpsURLConnection
-        myConnection.setRequestProperty("X-API-KEY", "zfix27r")
-        myConnection.setRequestProperty("User-Agent", "zfix27r")
-
-
-
-        return inflater.inflate(R.layout.fragment_main, container, false)
+            }
+        }
     }
-
 }
