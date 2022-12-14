@@ -12,7 +12,7 @@ import ru.zfix27r.movies.domain.model.FilmResModel
 data class FilmEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = KINOPOISK_ID)
-    val kinopoiskId: Long,
+    val kinopoiskId: Int,
 
     @ColumnInfo(name = NAME_RU)
     val nameRu: String,

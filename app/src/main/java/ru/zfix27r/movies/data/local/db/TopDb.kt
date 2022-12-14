@@ -1,4 +1,4 @@
-package ru.zfix27r.movies.data.local.entity.top
+package ru.zfix27r.movies.data.local.db
 
 import androidx.room.Embedded
 import androidx.room.Relation

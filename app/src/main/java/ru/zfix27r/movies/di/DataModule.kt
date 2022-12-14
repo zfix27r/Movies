@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.zfix27r.movies.data.local.AppDatabase
 import ru.zfix27r.movies.data.local.TopDao
+import ru.zfix27r.movies.data.remote.KinopoiskApi
 import javax.inject.Singleton
 
 @Module
@@ -28,7 +29,13 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideFilmTopDao(db: AppDatabase): TopDao {
+    fun provideTopDao(db: AppDatabase): TopDao {
         return db.topDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideKinopoiskApi(): KinopoiskApi {
+        return KinopoiskApi.create()
     }
 }
