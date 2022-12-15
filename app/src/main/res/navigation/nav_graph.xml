@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/main">
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/main"
         android:name="ru.zfix27r.movies.ui.main.MainFragment"
         android:label=""
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_main_to_movieDetail"
+            app:destination="@id/movieDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetail"
+        android:name="ru.zfix27r.movies.ui.detail.MovieDetailFragment"
+        android:label="" />
 </navigation>

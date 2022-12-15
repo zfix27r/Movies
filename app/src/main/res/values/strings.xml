@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Movies</string>
+
+    <string name="response_no_internet">Нет соединения с интернетом</string>
 </resources>
