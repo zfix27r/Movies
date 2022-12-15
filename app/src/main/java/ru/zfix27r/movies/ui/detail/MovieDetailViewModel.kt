@@ -21,10 +21,10 @@ class MovieDetailViewModel @Inject constructor(
     private var _response: MutableLiveData<Throwable> = MutableLiveData()
     val response: LiveData<Throwable> = _response
 
-    private val movieId = savedStateHandle.get<Long>(MOVIE_ID) ?: 0L
+    private val movieId = savedStateHandle.get<Int>(MOVIE_ID) ?: 0
 
     init {
-        if (movieId == 0L) throw Exception("MovieDetailViewModel получен пустой id")
+        if (movieId == 0) throw Exception("MovieDetailViewModel получен пустой id")
         loadNote()
     }
 

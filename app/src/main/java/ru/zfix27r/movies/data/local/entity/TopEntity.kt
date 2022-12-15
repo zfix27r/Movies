@@ -16,10 +16,10 @@ import ru.zfix27r.movies.data.local.entity.TopEntity.Companion.TOP_TABLE_NAME
 )
 data class TopEntity(
     @PrimaryKey(autoGenerate = false)
-    val id: Long,
+    val id: Int,
 
     @ColumnInfo(name = FILM_ID)
-    val filmId: Long,
+    val filmId: Int,
 
     @ColumnInfo(name = UPDATED_AT)
     val updated_at: String

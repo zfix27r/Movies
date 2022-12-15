@@ -1,24 +1,24 @@
-package ru.zfix27r.movies.data.remote.model.film.top
+package ru.zfix27r.movies.data.remote.model
 
 import ru.zfix27r.movies.data.local.entity.FilmEntity
 import ru.zfix27r.movies.data.local.entity.TopEntity
 import java.time.LocalDateTime
 
-data class TopFilm(
-    val filmId: Long,
+data class KinopoiskTopFilmResModel(
+    val filmId: Int,
     val nameRu: String,
     val nameEn: String,
     val year: String,
     val length: String,
-    val countries: List<TopCountry>,
-    val genres: List<TopGenre>,
+    val countries: List<KinopoiskTopFilmCountryResModel>,
+    val genres: List<KinopoiskTopFilmGenreResModel>,
     val rating: Float,
     val ratingVoteCount: String,
     val posterUrl: String,
     val posterUrlPreview: String,
     val ratingChange: String
 ) {
-    fun toTopEntity(id: Long): TopEntity {
+    fun toTopEntity(id: Int): TopEntity {
         return TopEntity(
             id = id,
             filmId = filmId,

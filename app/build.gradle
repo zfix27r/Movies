@@ -52,6 +52,7 @@ dependencies {
     implementation "com.google.android.material:material:$androidxMaterial"
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$androidxConstraintlayout"
+    implementation "androidx.paging:paging-runtime-ktx:$androidxPaging"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidxLifecycle"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$androidxLifecycle"
@@ -63,6 +64,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$androidxRoomVersion"
     kapt "androidx.room:room-compiler:$androidxRoomVersion"
     implementation "androidx.room:room-ktx:$androidxRoomVersion"
+    implementation "androidx.room:room-paging:$androidxRoomVersion"
 
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
@@ -70,6 +72,9 @@ dependencies {
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$viewBindingDelegateVersion"
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
 
     implementation "com.google.code.gson:gson:$gsonVersion"
 
