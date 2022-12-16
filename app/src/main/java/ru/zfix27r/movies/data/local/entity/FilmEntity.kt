@@ -29,15 +29,13 @@ data class FilmEntity(
     @ColumnInfo(name = UPDATED_AT)
     val updated_at: String
 ) {
-    fun toFilmResModel(): FilmResModel {
-        return FilmResModel(
-            id = kinopoiskId,
-            nameRu = nameRu,
-            posterUrl = posterUrl,
-            rating = kinopoiskRating,
-            ratingVoteCount = kinopoiskRatingVoteCount
-        )
-    }
+    fun toFilmResModel() = FilmResModel(
+        id = kinopoiskId,
+        nameRu = nameRu,
+        posterUrl = posterUrl,
+        rating = kinopoiskRating,
+        ratingVoteCount = kinopoiskRatingVoteCount
+    )
 
     companion object {
         const val FILM_TABLE_NAME = "film"

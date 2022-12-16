@@ -12,12 +12,9 @@ import ru.zfix27r.movies.domain.usecase.GetTopPagingDataUseCase
 @InstallIn(ViewModelComponent::class)
 class DomainModule {
     @Provides
-    fun provideGetTopPagingSourceUseCase(repository: TopRepositoryImpl): GetTopPagingDataUseCase {
-        return GetTopPagingDataUseCase(repository)
-    }
+    fun provideGetTopPagingSourceUseCase(repository: TopRepositoryImpl) =
+        GetTopPagingDataUseCase(repository)
 
     @Provides
-    fun provideGetFilmUseCase(repository: TopRepositoryImpl): GetFilmUseCase {
-        return GetFilmUseCase(repository)
-    }
+    fun provideGetFilmUseCase(repository: TopRepositoryImpl) = GetFilmUseCase(repository)
 }

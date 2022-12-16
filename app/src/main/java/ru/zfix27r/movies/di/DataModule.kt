@@ -20,22 +20,16 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(
-            context, AppDatabase::class.java,
-            APP_DATABASE_NAME
-        )/*.createFromAsset(APP_DATABASE_DUMP_NAME)*/.build()
-    }
+    fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
+        context, AppDatabase::class.java,
+        APP_DATABASE_NAME
+    )/*.createFromAsset(APP_DATABASE_DUMP_NAME)*/.build()
 
     @Singleton
     @Provides
-    fun provideTopDao(db: AppDatabase): TopDao {
-        return db.topDao()
-    }
+    fun provideTopDao(db: AppDatabase) = db.topDao()
 
     @Singleton
     @Provides
-    fun provideKinopoiskApi(): KinopoiskApi {
-        return KinopoiskApi.create()
-    }
+    fun provideKinopoiskApi() = KinopoiskApi.create()
 }

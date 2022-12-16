@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.databinding.FragmentMovieDetailBinding
+import ru.zfix27r.movies.ui.snack
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
