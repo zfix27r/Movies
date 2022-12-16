@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.databinding.FragmentMainBinding
 import ru.zfix27r.movies.domain.model.TopResModel
+import ru.zfix27r.movies.ui.snack
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
