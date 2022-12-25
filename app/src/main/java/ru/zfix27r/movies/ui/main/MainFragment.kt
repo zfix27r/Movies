@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.databinding.FragmentMainBinding
 import ru.zfix27r.movies.domain.model.TopResModel
-import ru.zfix27r.movies.ui.snack
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -33,8 +32,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         observeLoadState()
         observeTopData()
+        listenRetry()
     }
-
 
     private fun observeLoadState() {
         lifecycleScope.launch {
@@ -42,6 +41,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 adapter.loadStateFlow.collectLatest {
                     binding.progressBar.isVisible =
                         it.refresh is LoadState.Loading || it.append is LoadState.Loading || false
+
+                    if (it.refresh is LoadState.Error) {
+                        val msg = (it.refresh as LoadState.Error).error.message ?: ""
+                        viewError(msg)
+                    }
                 }
             }
         }
@@ -55,6 +59,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
+    private fun listenRetry() {
+        binding.retry.setOnClickListener {
+            binding.responseContainer.isVisible = false
+            adapter.retry()
+        }
+    }
+
     private fun onListenAction(): MovieActionListener {
         return object : MovieActionListener {
             override fun onViewDetail(topResModel: TopResModel) {
@@ -64,6 +75,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 )
             }
         }
+    }
+
+    private fun viewError(msg: String) {
+        binding.responseContainer.isVisible = true
+        binding.responseMessage.text = getString(msg.toInt())
     }
 
     companion object {

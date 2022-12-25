@@ -7,13 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
-import ru.zfix27r.movies.KINOPOISKAPIUNOFFICIAL_TECH_KEY
-import ru.zfix27r.movies.KINOPOISKAPIUNOFFICIAL_TECH_KEY_2
+import ru.zfix27r.movies.BuildConfig
 import ru.zfix27r.movies.data.remote.model.KinopoiskTopResModel
 
 interface KinopoiskApi {
 
-    @Headers("X-API-KEY: $KINOPOISKAPIUNOFFICIAL_TECH_KEY_2")
+    @Headers("X-API-KEY: ${BuildConfig.KINOPOISK_1_API_KEY}")
     @GET("v2.2/films/top")
     suspend fun getTop(
         @Query("page")

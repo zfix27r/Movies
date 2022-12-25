@@ -20,6 +20,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
+        def apiKey1 = properties.getProperty("kinopoisk_1_api_key", "")
+        def apiKey2 = properties.getProperty("kinopoisk_2_api_key", "")
+        it.buildConfigField "String", "KINOPOISK_1_API_KEY", apiKey1
+        it.buildConfigField "String", "KINOPOISK_2_API_KEY", apiKey2
+    }
+
     buildTypes {
         release {
             minifyEnabled false
