@@ -3,17 +3,10 @@ package ru.zfix27r.movies.data.remote
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.data.local.TopDao
-import ru.zfix27r.movies.data.local.db.TopDb
-import ru.zfix27r.movies.data.local.entity.FilmEntity
-import ru.zfix27r.movies.data.local.entity.TopEntity
 import ru.zfix27r.movies.domain.model.TopResModel
-import java.time.LocalDateTime
 import kotlin.math.max
 
 private const val STARTING_KEY = 0
@@ -25,7 +18,7 @@ class KinopoiskTopPagingSource(
     PagingSource<Int, TopResModel>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TopResModel> {
         val key = params.key ?: STARTING_KEY
-        println("LOADING")
+
         var data = getLocalData(key, params.loadSize)
         if (data.isEmpty()) {
             loadRemoteData()?.let {
