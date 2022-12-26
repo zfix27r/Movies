@@ -27,18 +27,18 @@ buildscript {
         androidxPaging = '3.1.1'
         androidxSwiperefreshlayout = '1.1.0'
         // Dagger Hilt
-        hiltVersion = '2.43.2'
+        hiltVersion = '2.44.2'
         hiltWorkerVersion = '1.0.0'
         // Gson
-        gsonVersion = '2.9.1'
+        gsonVersion = '2.10'
         // Retrofit2
         retrofit2Version = '2.9.0'
         // View binding delegate
-        viewBindingDelegateVersion = '1.5.3'
+        viewBindingDelegateVersion = '1.5.6'
         // Timber
         timberVersion = '5.0.1'
         // Glide
-        glideVersion = '3.7.0'
+        glideVersion = '4.14.2'
     }
 
     repositories {

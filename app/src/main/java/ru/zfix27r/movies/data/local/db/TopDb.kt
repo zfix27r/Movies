@@ -17,11 +17,9 @@ data class TopDb(
     )
     val film: FilmEntity
 ) {
-    fun toTopResModel(): TopResModel {
-        return TopResModel(
-            id = film.kinopoiskId,
-            nameRu = film.nameRu,
-            posterUrlPreview = film.posterUrlPreview
-        )
-    }
+    fun toTopResModel() = TopResModel(
+        id = film.kinopoiskId,
+        nameRu = film.nameRu,
+        posterUrlPreview = film.posterUrlPreview
+    )
 }

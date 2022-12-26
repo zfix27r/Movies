@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,15 +33,23 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         observeLoadState()
         observeTopData()
+        listenRetry()
     }
-
 
     private fun observeLoadState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 adapter.loadStateFlow.collectLatest {
                     binding.progressBar.isVisible =
-                        it.refresh is LoadState.Loading || it.append is LoadState.Loading || false
+                        it.refresh is LoadState.Loading || it.append is LoadState.Loading
+                    binding.responseContainer.isVisible =
+                        it.refresh is LoadState.Error
+
+                    if (it.refresh is LoadState.Error) {
+                        (it.refresh as LoadState.Error).error.message?.let { msg ->
+                            showSnack(msg)
+                        }
+                    }
                 }
             }
         }
@@ -49,8 +58,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun observeTopData() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.top.collectLatest { adapter.submitData(it) }
+                viewModel.top.collectLatest {
+                    adapter.submitData(it)
+                }
             }
+        }
+    }
+
+    private fun listenRetry() {
+        binding.retry.setOnClickListener {
+            adapter.retry()
         }
     }
 
@@ -63,6 +80,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 )
             }
         }
+    }
+
+    private fun showSnack(msg: String) {
+        Snackbar.make(binding.root, getString(msg.toInt()), Snackbar.LENGTH_SHORT).show()
     }
 
     companion object {
