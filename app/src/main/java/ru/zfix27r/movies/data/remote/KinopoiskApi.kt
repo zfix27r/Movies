@@ -14,7 +14,7 @@ interface KinopoiskApi {
 
     @Headers("X-API-KEY: ${BuildConfig.KINOPOISK_1_API_KEY}")
     @GET("v2.2/films/top")
-    suspend fun getTop(
+    fun getTop(
         @Query("page")
         page: Int
     ): KinopoiskTopResModel

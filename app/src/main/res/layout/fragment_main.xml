@@ -16,13 +16,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:outlineProvider="background"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -65,7 +66,16 @@
                 android:layout_marginTop="8dp"
                 android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                 tools:text="Error" />
+
         </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/main_bottom_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
