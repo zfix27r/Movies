@@ -1,5 +1,9 @@
 package ru.zfix27r.movies.ui.main
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -9,9 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -19,6 +25,12 @@ import kotlinx.coroutines.launch
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.databinding.FragmentMainBinding
 import ru.zfix27r.movies.domain.model.TopResModel
+
+const val SERVICE_INTENT_FILTER = "filter"
+const val SERVICE_DATA_EXTRA = "data"
+const val SERVICE_TOP_DATA_NAME_EXTRA = "top_name"
+const val SERVICE_NO_INTERNET_EXTRA = "no_internet"
+const val SERVICE_EMPTY_DATA_EXTRA = "empty_data"
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -31,9 +43,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.recycler.adapter = adapter
 
-        observeLoadState()
-        observeTopData()
-        listenRetry()
+        //observeLoadState()
+        //observeTopData()
+        //listenRetry()
+
+        viewModel.loadDataWithService(requireActivity(), loadResultReceiver)
+
+        binding.bottomNavView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.bottom_main -> {}
+                R.id.bottom_search -> {}
+            }
+
+
+            true
+        }
     }
 
     private fun observeLoadState() {
@@ -83,7 +107,22 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun showSnack(msg: String) {
-        Snackbar.make(binding.root, getString(msg.toInt()), Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private val loadResultReceiver = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            p1?.let {
+                showSnack(it.getStringExtra(SERVICE_DATA_EXTRA) ?: throw Exception())
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        activity?.let {
+            LocalBroadcastManager.getInstance(it).unregisterReceiver(loadResultReceiver)
+        }
+        super.onDestroy()
     }
 
     companion object {
