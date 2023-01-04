@@ -5,77 +5,150 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="ru.zfix27r.movies.ui.main.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.MainFragment">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:outlineProvider="background"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:spanCount="3"
-            tools:listitem="@layout/fragment_main_item" />
+            android:layout_height="match_parent">
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                isVisible="@{!viewModel.isLoading()}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.main.MainFragment">
 
-        <LinearLayout
-            android:id="@+id/response_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_24"
+                    android:layout_marginTop="@dimen/margin_24"
+                    android:layout_marginEnd="@dimen/margin_24"
+                    app:endIconContentDescription="filter"
+                    app:endIconDrawable="@drawable/ic_baseline_filter_list_24"
+                    app:endIconMode="custom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_baseline_search_24">
 
-            <Button
-                android:id="@+id/retry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/error_reload" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/main_search_hint" />
 
-            <TextView
-                android:id="@+id/response_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                tools:text="Error" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/premieres"
+                    style="@style/Theme.Movies.BlockTitle"
+                    android:text="@string/main_premiere_title"
+                    app:layout_constraintEnd_toStartOf="@+id/premieres_nav"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/main_bottom_menu" />
+                <TextView
+                    android:id="@+id/premieres_nav"
+                    style="@style/Theme.Movies.BlockNav"
+                    android:text="@string/main_all"
+                    app:layout_constraintBottom_toBottomOf="@id/premieres"
+                    app:layout_constraintEnd_toEndOf="@+id/search" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/premieres_recycler"
+                    style="@style/Theme.Movies.BlockRecycler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/premieres"
+                    tools:listitem="@layout/fragment_main_premier_item" />
+
+                <TextView
+                    android:id="@+id/await"
+                    style="@style/Theme.Movies.BlockTitle"
+                    android:text="@string/main_await_title"
+                    app:layout_constraintEnd_toStartOf="@+id/await_nav"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/premieres_recycler" />
+
+                <TextView
+                    android:id="@+id/await_nav"
+                    style="@style/Theme.Movies.BlockNav"
+                    android:text="@string/main_all"
+                    app:layout_constraintBottom_toBottomOf="@id/await"
+                    app:layout_constraintEnd_toEndOf="@+id/search" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/await_recycler"
+                    style="@style/Theme.Movies.BlockRecycler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/await"
+                    tools:listitem="@layout/fragment_main_top_item" />
+
+                <TextView
+                    android:id="@+id/best"
+                    style="@style/Theme.Movies.BlockTitle"
+                    android:text="@string/main_best_title"
+                    app:layout_constraintEnd_toStartOf="@+id/best_nav"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/await_recycler" />
+
+                <TextView
+                    android:id="@+id/best_nav"
+                    style="@style/Theme.Movies.BlockNav"
+                    android:text="@string/main_all"
+                    app:layout_constraintBottom_toBottomOf="@id/best"
+                    app:layout_constraintEnd_toEndOf="@+id/search" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/best_recycler"
+                    style="@style/Theme.Movies.BlockRecycler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/best"
+                    tools:listitem="@layout/fragment_main_top_item" />
+
+                <TextView
+                    android:id="@+id/popular"
+                    style="@style/Theme.Movies.BlockTitle"
+                    android:text="@string/main_popular_title"
+                    app:layout_constraintEnd_toStartOf="@+id/popular_nav"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/best_recycler" />
+
+                <TextView
+                    android:id="@+id/popular_nav"
+                    style="@style/Theme.Movies.BlockNav"
+                    android:text="@string/main_all"
+                    app:layout_constraintBottom_toBottomOf="@id/popular"
+                    app:layout_constraintEnd_toEndOf="@+id/search" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/popular_recycler"
+                    style="@style/Theme.Movies.BlockRecycler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popular"
+                    tools:listitem="@layout/fragment_main_top_item" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            layout="@layout/loading_progress"
+            app:isLoading="@{viewModel.isLoading()}" />
+
+        <include
+            layout="@layout/loading_error"
+            app:callback="@{viewModel::retry}"
+            app:message="@{viewModel.error}" />
+    </FrameLayout>
 </layout>

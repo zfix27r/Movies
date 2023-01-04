@@ -10,12 +10,22 @@
         android:name="ru.zfix27r.movies.ui.main.MainFragment"
         android:label=""
         tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_main_to_movieDetail"
-            app:destination="@id/movieDetail" />
     </fragment>
     <fragment
-        android:id="@+id/movieDetail"
-        android:name="ru.zfix27r.movies.ui.detail.MovieDetailFragment"
+        android:id="@+id/filmDetail"
+        android:name="ru.zfix27r.movies.ui.detail.FilmDetailFragment"
         android:label="" />
+    <fragment
+        android:id="@+id/search"
+        android:name="ru.zfix27r.movies.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/top"
+        android:name="ru.zfix27r.movies.ui.top.TopFragment"
+        android:label="fragment_top"
+        tools:layout="@layout/fragment_top" />
+    <action
+        android:id="@+id/action_global_filmDetail"
+        app:destination="@id/filmDetail" />
 </navigation>

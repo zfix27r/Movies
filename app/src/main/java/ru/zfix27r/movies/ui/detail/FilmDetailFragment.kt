@@ -10,8 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.databinding.FragmentMovieDetailBinding
 
+const val FILM_ID = "film_id"
+
 @AndroidEntryPoint
-class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
+class FilmDetailFragment : Fragment(R.layout.fragment_movie_detail) {
     private val binding by viewBinding(FragmentMovieDetailBinding::bind)
     private val viewModel by viewModels<MovieDetailViewModel>()
 

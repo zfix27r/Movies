@@ -8,7 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.zfix27r.movies.data.local.AppDatabase
-import ru.zfix27r.movies.data.local.TopDao
 import ru.zfix27r.movies.data.remote.KinopoiskApi
 import javax.inject.Singleton
 
@@ -27,7 +26,7 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideTopDao(db: AppDatabase) = db.topDao()
+    fun provideMainDao(db: AppDatabase) = db.mainDao()
 
     @Singleton
     @Provides

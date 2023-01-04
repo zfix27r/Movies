@@ -5,41 +5,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.zfix27r.movies.R
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var navController: NavController
-    private lateinit var toolbar: Toolbar
+    private val appBarConfiguration: AppBarConfiguration by lazy {
+        AppBarConfiguration(setOf(R.id.main, R.id.search, R.id.top))
+    }
+    private val navController: NavController by lazy {
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        navHost.navController
+    }
+    private val toolbar: Toolbar by lazy { findViewById(R.id.main_toolbar) }
+    private val bottomNavView: BottomNavigationView by lazy { findViewById(R.id.bottom_nav_view) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.main_toolbar)
+        setSupportActionBar(toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
-        setNavController()
-        setActionBar()
+        bottomNavView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    private fun setNavController() {
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-        navController = navHost.navController
-    }
-
-    private fun setActionBar() {
-        setSupportActionBar(toolbar)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 }

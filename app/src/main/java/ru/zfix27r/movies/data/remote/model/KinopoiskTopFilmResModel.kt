@@ -1,40 +1,40 @@
 package ru.zfix27r.movies.data.remote.model
 
 import ru.zfix27r.movies.data.local.entity.FilmEntity
-import ru.zfix27r.movies.data.local.entity.TopEntity
-import java.time.LocalDateTime
+import ru.zfix27r.movies.data.local.entity.TopAwaitEntity
+import ru.zfix27r.movies.data.local.entity.TopBestEntity
+import ru.zfix27r.movies.data.local.entity.TopPopularEntity
+import ru.zfix27r.movies.domain.model.TopResModel
 
 data class KinopoiskTopFilmResModel(
     val filmId: Int,
     val nameRu: String,
-    val nameEn: String,
-    val year: String,
-    val length: String,
-    val countries: List<KinopoiskTopFilmCountryResModel>,
-    val genres: List<KinopoiskTopFilmGenreResModel>,
-    val rating: Float,
-    val ratingVoteCount: String,
-    val posterUrl: String,
-    val posterUrlPreview: String,
-    val ratingChange: String
+    val rating: String,
+    val posterUrlPreview: String
 ) {
-    fun toTopEntity(id: Int): TopEntity {
-        return TopEntity(
-            id = id,
-            filmId = filmId,
-            updated_at = LocalDateTime.now().toString()
-        )
-    }
+    fun toTopBestEntity() = TopBestEntity(
+        filmId = filmId
+    )
 
-    fun toFilmEntity(): FilmEntity {
-        return FilmEntity(
-            nameRu = nameRu,
-            posterUrl = posterUrl,
-            posterUrlPreview = posterUrlPreview,
-            kinopoiskId = filmId,
-            kinopoiskRating = rating,
-            kinopoiskRatingVoteCount = ratingVoteCount,
-            updated_at = LocalDateTime.now().toString()
-        )
-    }
+    fun toTopPopularEntity() = TopPopularEntity(
+        filmId = filmId
+    )
+
+    fun toTopAwaitEntity() = TopAwaitEntity(
+        filmId = filmId
+    )
+
+    fun toFilmEntity() = FilmEntity(
+        nameRu = nameRu,
+        posterUrlPreview = posterUrlPreview,
+        kinopoiskId = filmId,
+        kinopoiskRating = rating,
+        updated_at = 0L
+    )
+
+    fun toTopResModel() = TopResModel(
+        id = filmId,
+        nameRu = nameRu,
+        posterUrlPreview = posterUrlPreview
+    )
 }

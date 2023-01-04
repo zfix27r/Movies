@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Movies</string>
 
+    <string name="empty"></string>
     <string name="response_no_internet">Нет соединения с интернетом</string>
-    <string name="error_reload">Повторить</string>
+    <string name="error_retry">Повторить</string>
+    <string name="main_premiere_title">Премьеры</string>
+    <string name="main_all">все</string>
+    <string name="main_best_title">Лучшие</string>
+    <string name="main_await_title">Ожидаемое</string>
+    <string name="main_popular_title">Популярные</string>
+    <string name="main_search_hint">Поиск</string>
 </resources>

@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ru.zfix27r.movies.ui.detail.MovieDetailFragment">
+    tools:context="ru.zfix27r.movies.ui.detail.FilmDetailFragment">
 
     <data>
 
@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/poster"
                 tools:text="Форсаж" />
 
-            <RatingBar
+<!--            <RatingBar
                 android:id="@+id/rating"
                 style="@android:style/Widget.Material.RatingBar.Small"
                 android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
                 android:numStars="10"
                 android:rating="@{viewModel.movie.rating}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rating_vote_count" />
+                app:layout_constraintTop_toBottomOf="@+id/rating_vote_count" />-->
 
             <TextView
                 android:id="@+id/rating_vote_count"

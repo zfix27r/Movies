@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="film"
+            type="ru.zfix27r.movies.domain.model.TopResModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/preview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/no_poster"
+            app:layout_constraintBottom_toTopOf="@+id/titleRu"
+            app:layout_constraintDimensionRatio="6:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/no_poster" />
+
+        <TextView
+            android:id="@+id/titleRu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.9"
+            android:ellipsize="end"
+            android:gravity="top"
+            android:lines="2"
+            android:text="@{film.nameRu}"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/preview"
+            app:layout_constraintStart_toStartOf="@+id/preview"
+            tools:text="Фильм на фильме фильмом погоняет " />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

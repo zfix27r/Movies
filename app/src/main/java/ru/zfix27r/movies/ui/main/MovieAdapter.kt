@@ -5,9 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.Glide
 import ru.zfix27r.movies.R
-import ru.zfix27r.movies.databinding.FragmentMainItemBinding
+import ru.zfix27r.movies.databinding.FragmentMainTopItemBinding
 import ru.zfix27r.movies.domain.model.TopResModel
 
 class MovieAdapter(
@@ -17,9 +16,9 @@ class MovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = FragmentMainItemBinding.inflate(inflater, parent, false)
+        val binding = FragmentMainTopItemBinding.inflate(inflater, parent, false)
 
-        binding.movieItem.setOnClickListener(this)
+        binding.item.setOnClickListener(this)
 
         return MovieViewHolder(binding)
     }
@@ -27,9 +26,9 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         getItem(position)?.let {
             with(holder.binding) {
-                movieItem.tag = it
+                item.tag = it
 
-                Glide.with(holder.binding.movieItem.context).load(it.posterUrlPreview).into(preview)
+                //Glide.with(holder.binding.movieItem.context).load(it.posterUrlPreview).into(preview)
 
                 this.film = it
             }
@@ -44,7 +43,7 @@ class MovieAdapter(
     override fun onClick(v: View) {
         val item = v.tag as TopResModel
         when (v.id) {
-            R.id.movie_item -> actionListener.onViewDetail(item)
+            R.id.item -> actionListener.onViewDetail(item)
         }
     }
 }

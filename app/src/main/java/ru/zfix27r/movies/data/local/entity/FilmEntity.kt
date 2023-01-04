@@ -17,17 +17,17 @@ data class FilmEntity(
     @ColumnInfo(name = NAME_RU)
     val nameRu: String,
     @ColumnInfo(name = POSTER_URL)
-    val posterUrl: String,
+    val posterUrl: String = "",
     @ColumnInfo(name = POSTER_URL_PREVIEW)
     val posterUrlPreview: String,
 
     @ColumnInfo(name = KINOPOISK_RATING)
-    val kinopoiskRating: Float,
+    val kinopoiskRating: String = "",
     @ColumnInfo(name = KINOPOISK_RATING_VOTE_COUNT)
-    val kinopoiskRatingVoteCount: String,
+    val kinopoiskRatingVoteCount: String = "",
 
     @ColumnInfo(name = UPDATED_AT)
-    val updated_at: String
+    val updated_at: Long = System.currentTimeMillis()
 ) {
     fun toFilmResModel() = FilmResModel(
         id = kinopoiskId,

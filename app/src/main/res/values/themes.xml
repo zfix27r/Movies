@@ -13,4 +13,40 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="Theme.Movies.BlockTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_8</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">@dimen/margin_24</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+        <item name="android:textAppearance">@style/TextAppearance.Material3.TitleLarge</item>
+    </style>
+
+    <style name="Theme.Movies.BlockNav">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:layout_marginStart">@dimen/margin_16</item>
+        <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:textAppearance">@style/TextAppearance.Material3.TitleMedium</item>
+    </style>
+
+    <style name="Theme.Movies.BlockRecycler">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+
+    </style>
+
 </resources>

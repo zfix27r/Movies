@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bottom_main"
+        android:id="@+id/main"
         android:icon="@drawable/ic_baseline_local_movies_24"
         android:title="Movie" />
     <item
-        android:id="@+id/bottom_search"
+        android:id="@+id/search"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="Search" />
     <item
-        android:id="@+id/bottom_top"
+        android:id="@+id/top"
         android:icon="@drawable/ic_baseline_subscriptions_24"
         android:title="TOP 250" />
 </menu>
