@@ -3,15 +3,15 @@ package ru.zfix27r.movies.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.databinding.FragmentMainPremierItemBinding
 import ru.zfix27r.movies.domain.model.PremiereResModel
+import ru.zfix27r.movies.ui.common.NavigateToFilmDetailCallback
 
 class PremierAdapter(
-    private val navFilmListener: NavFilmListener
+    private val navFilmListener: NavigateToFilmDetailCallback
 ) : ListAdapter<PremiereResModel, PremierAdapterMainViewHolder>(DiffCallback()),
     View.OnClickListener {
 
@@ -50,7 +50,7 @@ class PremierAdapter(
     override fun onClick(v: View) {
         val item = v.tag as PremiereResModel
         when (v.id) {
-            R.id.item -> navFilmListener.navigate(item.id)
+            R.id.item -> navFilmListener.toFilmDetail(item.id)
         }
     }
 }

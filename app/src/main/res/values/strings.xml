@@ -2,12 +2,23 @@
     <string name="app_name">Movies</string>
 
     <string name="empty"></string>
-    <string name="response_no_internet">Нет соединения с интернетом</string>
+
+    <string name="error_no_internet">Нет соединения с интернетом</string>
+    <string name="error_bad_token">Пустой или неправильный токен</string>
+    <string name="error_not_found">Фильм не найден</string>
+    <string name="error_reach_day_limit">Превышен лимит запросов</string>
+    <string name="error_reach_request_limit">Слишком много запросов в секунду</string>
+    <string name="error_empty_response">Ошибка на сервере</string>
     <string name="error_retry">Повторить</string>
+
     <string name="main_premiere_title">Премьеры</string>
     <string name="main_all">все</string>
     <string name="main_best_title">Лучшие</string>
     <string name="main_await_title">Ожидаемое</string>
     <string name="main_popular_title">Популярные</string>
     <string name="main_search_hint">Поиск</string>
+    <string name="main_bottom_home_title">Главная</string>
+    <string name="main_bottom_search_title">Поиск</string>
+    <string name="main_bottom_profile_title">Профиль</string>
+    <string name="content_description_kinopoisk_logo">Логотип КиноПоиск</string>
 </resources>

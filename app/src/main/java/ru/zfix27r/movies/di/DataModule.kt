@@ -30,5 +30,21 @@ object DataModule {
 
     @Singleton
     @Provides
+    fun providePremiereDao(db: AppDatabase) = db.premiereDao()
+
+    @Singleton
+    @Provides
+    fun provideTopDao(db: AppDatabase) = db.topDao()
+
+    @Singleton
+    @Provides
+    fun provideTopBestDao(db: AppDatabase) = db.topBestDao()
+
+    @Singleton
+    @Provides
+    fun provideFilmDao(db: AppDatabase) = db.filmDao()
+
+    @Singleton
+    @Provides
     fun provideKinopoiskApi() = KinopoiskApi.create()
 }

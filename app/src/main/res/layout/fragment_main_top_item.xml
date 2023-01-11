@@ -7,7 +7,7 @@
 
         <variable
             name="film"
-            type="ru.zfix27r.movies.domain.model.TopResModel" />
+            type="ru.zfix27r.movies.domain.model.BaseResModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

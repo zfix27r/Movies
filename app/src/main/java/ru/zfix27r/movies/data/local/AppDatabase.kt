@@ -2,6 +2,7 @@ package ru.zfix27r.movies.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import ru.zfix27r.movies.data.local.dao.*
 import ru.zfix27r.movies.data.local.entity.*
 
 @Database(
@@ -16,4 +17,8 @@ import ru.zfix27r.movies.data.local.entity.*
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun mainDao(): MainDao
+    abstract fun premiereDao(): PremiereDao
+    abstract fun topDao(): TopDao
+    abstract fun filmDao(): FilmDao
+    abstract fun topBestDao(): TopBestDao
 }

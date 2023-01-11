@@ -5,27 +5,51 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/main">
 
+    <action
+        android:id="@+id/action_global_filmDetail"
+        app:destination="@id/filmDetail" />
+
+    <fragment
+        android:id="@+id/filmDetail"
+        android:name="ru.zfix27r.movies.ui.film.FilmDetailFragment"
+        android:label="" />
+
+    <action
+        android:id="@+id/action_global_filmsCategory"
+        app:destination="@id/filmsCategory" />
+
+    <fragment
+        android:id="@+id/filmsCategory"
+        android:name="ru.zfix27r.movies.ui.category.CategoryFragment"
+        android:label=""
+        tools:layout="@layout/fragment_category">
+        <argument
+            android:name="category_name"
+            app:argType="string" />
+    </fragment>
+
     <fragment
         android:id="@+id/main"
         android:name="ru.zfix27r.movies.ui.main.MainFragment"
         android:label=""
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_main_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_main_to_search"
+            app:destination="@id/search" />
     </fragment>
-    <fragment
-        android:id="@+id/filmDetail"
-        android:name="ru.zfix27r.movies.ui.detail.FilmDetailFragment"
-        android:label="" />
+
     <fragment
         android:id="@+id/search"
-        android:name="ru.zfix27r.movies.SearchFragment"
-        android:label="fragment_search"
+        android:name="ru.zfix27r.movies.ui.search.SearchFragment"
+        android:label=""
         tools:layout="@layout/fragment_search" />
+
     <fragment
-        android:id="@+id/top"
-        android:name="ru.zfix27r.movies.ui.top.TopFragment"
-        android:label="fragment_top"
-        tools:layout="@layout/fragment_top" />
-    <action
-        android:id="@+id/action_global_filmDetail"
-        app:destination="@id/filmDetail" />
+        android:id="@+id/profile"
+        android:name="ru.zfix27r.movies.ui.profile.ProfileFragment"
+        android:label=""
+        tools:layout="@layout/fragment_profile" />
 </navigation>

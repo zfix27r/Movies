@@ -1,19 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Movies" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
 
+    <style name="Theme.Movies" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorPrimaryVariant">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorSecondaryVariant">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 
     <style name="Theme.Movies.BlockTitle">
         <item name="android:layout_width">0dp</item>
@@ -34,19 +30,28 @@
         <item name="android:minHeight">48dp</item>
         <item name="android:gravity">bottom</item>
         <item name="android:layout_marginStart">@dimen/margin_16</item>
-        <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textAppearance">@style/TextAppearance.Material3.TitleMedium</item>
     </style>
 
-    <style name="Theme.Movies.BlockRecycler">
+    <style name="Theme.Movies.Recycler">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/margin_8</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="Theme.Movies.Recycler.Vertical">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginStart">@dimen/margin_24</item>
+        <item name="android:layout_marginEnd">@dimen/margin_24</item>
+        <item name="spanCount">3</item>
+        <item name="layoutManager">androidx.recyclerview.widget.GridLayoutManager</item>
+    </style>
+
+    <style name="Theme.Movies.Recycler.Horizontal">
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
         <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
-
     </style>
 
 </resources>

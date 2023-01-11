@@ -28,7 +28,7 @@ data class PremiereEntity(
     val updated_at: Long = System.currentTimeMillis()
 ) {
     companion object {
-        const val PREMIER_TABLE_NAME = "premier"
+        const val PREMIER_TABLE_NAME = "premiere"
         const val FILM_ID_NAME = "film_id"
         const val PREMIER_RU_NAME = "premier_ru"
         const val UPDATED_AT_NAME = "updated_at"

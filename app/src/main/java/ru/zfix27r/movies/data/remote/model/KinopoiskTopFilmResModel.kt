@@ -4,12 +4,12 @@ import ru.zfix27r.movies.data.local.entity.FilmEntity
 import ru.zfix27r.movies.data.local.entity.TopAwaitEntity
 import ru.zfix27r.movies.data.local.entity.TopBestEntity
 import ru.zfix27r.movies.data.local.entity.TopPopularEntity
-import ru.zfix27r.movies.domain.model.TopResModel
+import ru.zfix27r.movies.domain.model.BaseResModel
 
 data class KinopoiskTopFilmResModel(
     val filmId: Int,
     val nameRu: String,
-    val rating: String,
+    val rating: String?,
     val posterUrlPreview: String
 ) {
     fun toTopBestEntity() = TopBestEntity(
@@ -28,11 +28,11 @@ data class KinopoiskTopFilmResModel(
         nameRu = nameRu,
         posterUrlPreview = posterUrlPreview,
         kinopoiskId = filmId,
-        kinopoiskRating = rating,
+        kinopoiskRating = rating ?: "",
         updated_at = 0L
     )
 
-    fun toTopResModel() = TopResModel(
+    fun toTopResModel() = BaseResModel(
         id = filmId,
         nameRu = nameRu,
         posterUrlPreview = posterUrlPreview

@@ -7,19 +7,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import ru.zfix27r.movies.R
 import ru.zfix27r.movies.databinding.FragmentMainBinding
-import ru.zfix27r.movies.ui.detail.FILM_ID
+import ru.zfix27r.movies.ui.SingleActivity
+import ru.zfix27r.movies.ui.category.Categories
+import ru.zfix27r.movies.ui.category.TOP_TYPE
+import ru.zfix27r.movies.ui.common.NavigateToFilmDetailCallback
+import ru.zfix27r.movies.ui.film.FILM_ID
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
     private val binding by viewBinding(FragmentMainBinding::bind)
     private val viewModel by viewModels<MainViewModel>()
 
-    private val navFilm = object : NavFilmListener {
-        override fun navigate(id: Int) {
+    private val navFilm = object : NavigateToFilmDetailCallback {
+        override fun toFilmDetail(id: Int) {
             findNavController().navigate(
                 R.id.action_global_filmDetail, bundleOf(FILM_ID to id)
             )
@@ -40,73 +43,58 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.popularRecycler.adapter = popularAdapter
         binding.awaitRecycler.adapter = awaitAdapter
 
-        listenRetry()
-        observeData()
+        onObserveData()
+        setListeners()
     }
 
-    private fun listenRetry() {
-/*        binding.retry.setOnClickListener {
-            adapter.retry()
-        }*/
+    private fun onObserveData() {
+        viewModel.data.observe(viewLifecycleOwner) {
+            premieresAdapter.submitList(it.premieres)
+            awaitAdapter.submitList(it.await)
+            popularAdapter.submitList(it.popular)
+            bestAdapter.submitList(it.best)
+        }
     }
 
+    private fun setListeners() {
+        binding.premieresNav.setOnClickListener {
 
-/*    private fun observeLoadState() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                adapter.loadStateFlow.collectLatest {
-                    binding.progressBar.isVisible =
-                        it.refresh is LoadState.Loading || it.append is LoadState.Loading
-                    binding.responseContainer.isVisible =
-                        it.refresh is LoadState.Error
-
-                    if (it.refresh is LoadState.Error) {
-                        (it.refresh as LoadState.Error).error.message?.let { msg ->
-                            showSnack(msg)
-                        }
-                    }
-                }
-            }
         }
-    }*/
-
-    private fun observeData() {
-        viewModel.premieres.observe(viewLifecycleOwner) { premieresAdapter.submitList(it) }
-        viewModel.await.observe(viewLifecycleOwner) { awaitAdapter.submitList(it) }
-        viewModel.popular.observe(viewLifecycleOwner) { popularAdapter.submitList(it) }
-        viewModel.best.observe(viewLifecycleOwner) { bestAdapter.submitList(it) }
-/*
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.premieres.collectLatest {
-                    premieresAdapter.submitData(it)
-                }
-                viewModel.best.collectLatest {
-                    bestAdapter.submitList(it)
-                }
-                viewModel.popular.collectLatest {
-                    popularAdapter.submitList(it)
-                }
-                viewModel.await.collectLatest {
-                    awaitAdapter.submitList(it)
-                }
-            }
+        binding.awaitNav.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_global_filmsCategory,
+                bundleOf(TOP_TYPE to Categories.TOP_AWAIT.name)
+            )
         }
-*/
+        binding.popularNav.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_global_filmsCategory,
+                bundleOf(TOP_TYPE to Categories.TOP_POPULAR.name)
+            )
+        }
+        binding.bestNav.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_global_filmsCategory,
+                bundleOf(TOP_TYPE to Categories.TOP_BEST.name)
+            )
+        }
     }
 
-/*    private fun onListenAction(): MovieActionListener {
-        return object : MovieActionListener {
-            override fun onViewDetail(topResModel: FilmCompactResModel) {
-                findNavController().navigate(
-                    R.id.action_main_to_movieDetail,
-                    bundleOf(MOVIE_ID to topResModel.id)
-                )
-            }
-        }
-    }*/
+    override fun onResume() {
+        super.onResume()
+        hideToolbar()
+    }
 
-    private fun showSnack(msg: String) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
+    override fun onPause() {
+        super.onPause()
+        showToolbar()
+    }
+
+    private fun hideToolbar() {
+        (activity as SingleActivity).supportActionBar?.hide()
+    }
+
+    private fun showToolbar() {
+        (activity as SingleActivity).supportActionBar?.show()
     }
 }
